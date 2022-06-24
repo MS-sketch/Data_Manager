@@ -1,0 +1,17 @@
+Documentation:
+1. Introduction
+This program was created using Python. IDE used was PyCharm Community Edition. 
+2. Instruction(s):
+This program works by Generating Passwords & Storing them in a text file which is the encrypted using PyAesCrypt And then the original file is removed.
+You may use the command exit anytime to exit the program & you may also use the commands 1, 2, 3, 4... etc and Y or N
+in accordance to the input required.
+
+Note: 
+PyCharm is a software of JetBrains s.r.o
+Site: www.jetbrains.com
+Python is copyrighted by Python Software Foundation (C) 2001- 2022
+Site: www.python.org
+You may view the source & other documentation of PyAesCrypt at https://github.com/marcobellaccini/pyAesCrypt
+
+Thankyou for reading the documentation
+
