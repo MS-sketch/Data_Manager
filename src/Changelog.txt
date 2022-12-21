@@ -1,7 +1,0 @@
-Changelog Of Password Manager Version 1.2.9:
-
-1. Improved Security over the last version.
-2. Better UI & Some Spelling Corrections.
-3. Bug Fixes
-4. Better Stability
-5. Able to store Website Data
