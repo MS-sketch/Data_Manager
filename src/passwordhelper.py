@@ -92,6 +92,7 @@ class MainWindow_Password:
         self.main_win.close()
 
     def passwordgen(self):
+        self.ui.pushButton.setText("Copy")
         checked1 = str(self.ui.checkBox.isChecked())
         checked2 = str(self.ui.checkBox_2.isChecked())
         checked3 = str(self.ui.checkBox_3.isChecked())
@@ -165,8 +166,7 @@ class MainWindow_Password:
     def copypass(self):
         password = self.ui.label_9.text()
         pyperclip.copy(password)
-
-
+        self.ui.pushButton.setText("Copied!")
 
 
     def checkboxchk(self):
