@@ -7,7 +7,6 @@ from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtGui import QIcon
 from authcheck import MainWindow_auth
 
-
 class authentication(QDialog):
     def __init__(self):
         QDialog.__init__(self)

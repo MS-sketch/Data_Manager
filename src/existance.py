@@ -1,4 +1,5 @@
 import os
+
 def exists(fullfilename):
     file_exists = os.path.isfile(fullfilename)
     file_exists2 = str(file_exists)

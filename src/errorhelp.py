@@ -1,6 +1,5 @@
 import sys
 from PyQt6.QtWidgets import QApplication
-from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtWidgets import QDialog
 from error import Ui_Dialog
 from PyQt6.QtGui import *

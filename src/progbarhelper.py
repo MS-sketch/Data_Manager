@@ -1,8 +1,6 @@
 import sys
 import time
-
 from PyQt6.QtWidgets import QApplication
-from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtWidgets import QDialog
 from progbar import Ui_Dialog
 

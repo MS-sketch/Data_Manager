@@ -4,7 +4,6 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtWidgets import QDialog
 import existance
-import sqlmanagerhelper
 from newauth import Ui_Dialog
 import os
 import hashlib
@@ -91,7 +90,7 @@ class MainWindow_auth:
         password_entered_by_usr = self.ui.master_password_single_user.text()
         hashedpass = hashlib.sha256(password_entered_by_usr.encode("utf-8")).hexdigest()
 
-        info2 = sqlmanagerhelper.getmasterpassword(hashedpass)
+        info2 = entry_manager.getmasterpassword(hashedpass)
 
         if info2:
             self.ui.stackedWidgetmp.setCurrentWidget(self.ui.page_2)
@@ -148,7 +147,7 @@ class MainWindow_auth:
 
                     hasheddata = hashlib.sha256(confirmpass.encode("utf-8")).hexdigest()
 
-                    sqlmanagerhelper.masterpasswordsave(hasheddata)
+                    entry_manager.masterpasswordsave(hasheddata)
 
                     self.open_vault(newpass)
 

@@ -12,12 +12,8 @@ import random
 from passwordui import Ui_Dialog
 import pyperclip
 import passstrenght
-import re
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
-from PyQt6.QtGui import QRegularExpressionValidator
-from PyQt6.QtCore import QRegularExpressionMatch, QRegularExpression
-
 
 class MainWindow_Password:
 

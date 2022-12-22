@@ -175,3 +175,71 @@ def delete_from_index(id):
 
     conn.commit()
 
+#==========================From SQLMANAGERHELPER=====================================
+
+def masterpasswordsave(password_hash):
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS masterpassword(
+        id INTEGER PRIMARY KEY,
+        hash TEXT NOT NULL)
+        """)
+
+    cursor.execute("INSERT INTO masterpassword (hash) VALUES(?)", [password_hash])
+    conn.commit()
+
+
+def getmasterpassword(masterpasswordtobechecked):
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM masterpassword WHERE id = 1 AND hash = ?", [masterpasswordtobechecked])
+    return cursor.fetchall()
+
+
+def dynamic_table_fetch(table_name, what_to_select, database_name):
+    conn = sqlite3.connect(database_name)
+    cursor = conn.cursor()
+    cursor.execute("SELECT " + str(what_to_select) + " FROM " + str(table_name) + " WHERE id = 1")
+    return cursor.fetchall()
+
+
+def dynamic_table_create(database_name, table_name, feild_name, field_prop):
+    conn = sqlite3.connect(database_name)
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "CREATE TABLE IF NOT EXISTS " + str(table_name) + "(id INTEGER PRIMARY KEY, " + str(feild_name) + " " +
+        str(field_prop) + ")")
+    conn.commit()
+
+
+def dynamic_insert(database_name, table_name, info_to_be_insert, feild_to_be_data_value):
+    conn = sqlite3.connect(database_name)
+    cursor = conn.cursor()
+
+    cursor.execute("INSERT INTO  " + str(table_name) + " (" + str(feild_to_be_data_value) + ") VALUES(?)",
+                   [info_to_be_insert])
+    conn.commit()
+
+def type(type):
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS type(
+        id INTEGER PRIMARY KEY,
+        method TEXT NOT NULL)
+        """)
+
+    info = str(dynamic_table_fetch("type", "method", "usr_settings.db"))
+    if info == "[]":
+        password = type
+        cursor.execute("INSERT INTO type (method) VALUES(?)", [password])
+        conn.commit()
+
+    else:
+        password = type
+        cursor.execute("UPDATE type SET method = ? WHERE id = 1 ", [password])
+        conn.commit()
+#==========================From SQLMANAGERHELPER=====================================

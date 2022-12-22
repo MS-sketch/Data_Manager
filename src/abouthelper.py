@@ -1,11 +1,8 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMessageBox
+from PyQt6.QtWidgets import QApplication
 from PyQt6.QtWidgets import QDialog
 from PyQt6.QtGui import QIcon
-import os
-
 from about import Ui_About
-
 
 class MainWindow_About:
     def __init__(self):
