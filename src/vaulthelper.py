@@ -10,6 +10,7 @@ from folder_helper import Mainwindow_Folderdiag
 import entry_manager as en
 from folder_unit_help import MainWindow_Folder_Unit
 
+
 class MainWindow:
     def __init__(self, password):
         self.main_win = QMainWindow()
@@ -18,7 +19,7 @@ class MainWindow:
 
         self.iconfix()
 
-        #Encryption Key Create.
+        # Encryption Key Create.
         dataencryptor.keychk()
 
         self.ui.scrollArea_3.setWidgetResizable(True)
@@ -44,23 +45,21 @@ class MainWindow:
 
         self.window_for_newfolder.folder_diag_ui.ok_btn.clicked.connect(self.create_new_folder)
 
-
         self.floder_layout = QVBoxLayout(self.ui.scrollAreaWidgetContents_2)
 
         self.ui.tabWidget.setCurrentIndex(0)
 
         self.ui.main_2.clicked.connect(self.lock_vault)
 
-        # Spawing BTNS
+        # Creating Buttons
         self.entry_number = 1
         self.make_btn()
 
-        #Stopping Recursion
+        # Stopping Recursion
         self.btn_id = 0
 
-        #Setting Button Edit Function
+        # Setting Button Edit Function
         self.ui.save_btn_3.clicked.connect(lambda: self.edit_mode())
-
 
         self.ui.create_folder_2.clicked.connect(self.open_newfolder)
 
@@ -93,9 +92,8 @@ class MainWindow:
         if where_to_save == "Create A New Folder":
             input_barrier = self.data_check()
 
-            if input_barrier == True:
+            if input_barrier:
                 self.open_newfolder()
-
 
     def entry_saved(self, entry_name, type_save):
         text_limit = QMessageBox()
@@ -103,10 +101,12 @@ class MainWindow:
         text_limit.setWindowTitle("Entry " + str(type_save) + "!")
 
         if len(entry_name) > 17:
-            text_limit.setText("Your entry named '" + str(entry_name[0:16]) + "...' has been successfully " + str(type_save) + ".")
+            text_limit.setText(
+                "Your entry named '" + str(entry_name[0:16]) + "...' has been successfully " + str(type_save) + ".")
 
         elif len(entry_name) < 17:
-            text_limit.setText("Your entry named '" + str(entry_name) + "' has been successfully " + str(type_save) + ".")
+            text_limit.setText(
+                "Your entry named '" + str(entry_name) + "' has been successfully " + str(type_save) + ".")
 
         text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
         text_limit.setIcon(QMessageBox.Icon.Information)
@@ -143,7 +143,6 @@ class MainWindow:
             else:
                 warning_no_filled = warning_no_filled + ", Password"
 
-
         if len(warning_no_filled) > 0:
             text_limit = QMessageBox()
             text_limit.setWindowIcon(QIcon("icons\info.svg"))
@@ -169,12 +168,17 @@ class MainWindow:
         text_limit.setWindowTitle("Delete Entry")
 
         if len(self.current_title) > 17:
-            text_limit.setText("Are you sure you want to delete the entry named '" + str(self.current_title[0:16]) + "...'. \n"
-                               "DELETED ENTRIES CAN'T BE RECOVERED.")
+            text_limit.setText(
+                "Are you sure you want to delete the entry named '" + str(self.current_title[0:16]) + "...'. \n"
+                                                                                                      "DELETED "
+                                                                                                      "ENTRIES CAN'T "
+                                                                                                      "BE RECOVERED.")
 
         else:
             text_limit.setText("Are you sure you want to delete the entry named '" + str(self.current_title) + "'. \n"
-                               "DELETED ENTRIES CAN'T BE RECOVERED.")
+                                                                                                               "DELETED "
+                                                                                                               "ENTRIES CAN'T "
+                                                                                                               "BE RECOVERED.")
 
         text_limit.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         text_limit.setIcon(QMessageBox.Icon.Warning)
@@ -188,7 +192,6 @@ class MainWindow:
 
         text_limit.close()
 
-
     def temp(self):
         self.ui.save_btn_2.clicked.connect(lambda: self.save_exec())
 
@@ -197,12 +200,16 @@ class MainWindow:
         self.read_mode()
 
     def edit_mode(self):
+        self.enable_edit()
+
+        self.set_all_disabled()
+
+    def enable_edit(self):
         self.btn_id = int(self.ui.save_btn_3.objectName())
         self.temp()
 
         entry_point = en.fetch_from_default(int(self.ui.save_btn_3.objectName()))
         title = entry_point[1]
-
         website = entry_point[2]
         is_default = entry_point[3]
         usr_name = entry_point[4]
@@ -224,14 +231,6 @@ class MainWindow:
 
         else:
             self.ui.primary_websitedomain.setChecked(False)
-
-        self.ui.lineEdit_2.setReadOnly(False)
-        self.ui.web_address.setReadOnly(False)
-        self.ui.user_name.setReadOnly(False)
-        self.ui.lineEdit_3.setReadOnly(False)
-        self.ui.notes.setReadOnly(False)
-        self.ui.primary_websitedomain.show()
-        self.ui.stackedWidget_4.setCurrentWidget(self.ui.page_10)
 
     def set_entry_onsc(self, id):
         id2 = self.ui.save_btn_3.setObjectName(str(id))
@@ -239,41 +238,9 @@ class MainWindow:
         self.btn_id = id2
         self.temp()
 
-        entry_point = en.fetch_from_default(int(id))
-        title = entry_point[1]
+        self.enable_edit()
 
-        self.current_title = str(title)
-
-        website = entry_point[2]
-        is_default = entry_point[3]
-        usr_name = entry_point[4]
-        password = entry_point[5]
-        notes = entry_point[6]
-
-        self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
-
-        self.ui.stackedWidget_3.setCurrentWidget(self.ui.edit_save)
-
-        self.ui.lineEdit_2.setText(str(title))
-        self.ui.web_address.setText(str(website))
-        self.ui.user_name.setText(str(usr_name))
-        self.ui.lineEdit_3.setText(str(password))
-        self.ui.notes.setText(str(notes))
-
-        if int(is_default) == 0:
-            self.ui.primary_websitedomain.setChecked(True)
-
-        else:
-            self.ui.primary_websitedomain.setChecked(False)
-
-        self.ui.lineEdit_2.setReadOnly(True)
-        self.ui.web_address.setReadOnly(True)
-        self.ui.user_name.setReadOnly(True)
-        self.ui.lineEdit_3.setReadOnly(True)
-        self.ui.notes.setReadOnly(True)
-        self.ui.primary_websitedomain.hide()
-
-        self.ui.stackedWidget_4.setCurrentWidget(self.ui.page_11)
+        self.read_mode()
 
     def read_mode(self):
         self.ui.stackedWidget_4.setCurrentWidget(self.ui.page_11)
@@ -313,13 +280,11 @@ class MainWindow:
                 entry = en.fetch_from_default(y[0])
                 self.spawn(entry[1], y[0])
 
-        print(self.entry_number)
-
     def enable_save(self):
         self.btn_id = -1
 
     def update_entry(self, id):
-        #Will add an if statement to check if the entry is in default.
+        # Will add an if statement to check if the entry is in default.
 
         if self.btn_id != 0:
             title = self.ui.lineEdit_2.text()
@@ -328,18 +293,17 @@ class MainWindow:
             password = self.ui.lineEdit_3.text()
             notes = self.ui.notes.toPlainText()
 
-            if self.ui.primary_websitedomain.isChecked() == True:
+            if self.ui.primary_websitedomain.isChecked():
                 ischeck = 0
 
             else:
                 ischeck = 1
 
-            entry_manager.update_create_entry(id, title, website , ischeck, usr_name, password, notes)
+            entry_manager.update_create_entry(id, title, website, ischeck, usr_name, password, notes)
 
             self.btn_id = 0
 
             self.entry_saved(str(title), "updated")
-
 
     def refresh_scroll_area(self):
         for i in reversed(range(self.lay.count())):
@@ -352,8 +316,8 @@ class MainWindow:
 
         input_barrier = self.data_check()
 
-        if input_barrier == True:
-            if self.ui.primary_websitedomain.isChecked() == True:
+        if input_barrier:
+            if self.ui.primary_websitedomain.isChecked():
                 ischeck = 0
 
             else:
@@ -410,6 +374,10 @@ class MainWindow:
     def new_entry(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
         self.ui.stackedWidget_3.setCurrentWidget(self.ui.new_save)
+        self.set_all_disabled()
+        self.reset_all()
+
+    def set_all_disabled(self):
         self.ui.lineEdit_2.setReadOnly(False)
         self.ui.web_address.setReadOnly(False)
         self.ui.user_name.setReadOnly(False)
@@ -417,7 +385,6 @@ class MainWindow:
         self.ui.notes.setReadOnly(False)
         self.ui.primary_websitedomain.show()
         self.ui.stackedWidget_4.setCurrentWidget(self.ui.page_10)
-        self.reset_all()
 
     def reset_all(self):
         self.ui.lineEdit_2.setText("")
@@ -430,7 +397,7 @@ class MainWindow:
         self.ui.primary_websitedomain.setChecked(True)
 
     def btn_reset(self):
-        title_len =  len(self.ui.lineEdit_2.text())
+        title_len = len(self.ui.lineEdit_2.text())
 
         website_len = len(self.ui.web_address.text())
 
@@ -456,7 +423,7 @@ class MainWindow:
 
     def discard(self):
 
-        title_len =  len(self.ui.lineEdit_2.text())
+        title_len = len(self.ui.lineEdit_2.text())
 
         website_len = len(self.ui.web_address.text())
 
@@ -563,14 +530,12 @@ class MainWindow:
             else:
                 pass
 
-
     def open_folder_contents(self, btn_name):
         self.window_folder_pop = MainWindow_Folder_Unit(btn_name)
         self.window_folder_pop.show()
 
-
     def lock_vault(self):
-        #Encrypt Function.
+        # Encrypt Function.
 
         from authcheck import MainWindow_auth
         self.window_for_auth = MainWindow_auth()
@@ -590,6 +555,7 @@ class MainWindow:
 
     def show(self):
         self.main_win.show()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

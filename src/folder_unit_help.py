@@ -19,6 +19,11 @@ class MainWindow_Folder_Unit:
 
         self.ui.passwordgen_2.clicked.connect(self.open_pass)
 
+        # Defining Folder Layout
+        self.folder_layout_Scroll = QVBoxLayout(self.ui.scrollAreaWidgetContents_3)
+
+        self.entry_no = 0
+
     def open_pass(self):
         self.password_gen = MainWindow_Password()
         self.password_gen.show()
@@ -34,7 +39,11 @@ class MainWindow_Folder_Unit:
         pass
 
     def refresh_btn(self):
-        pass
+        for i in reversed(range(self.folder_layout_Scroll.count())):
+            self.folder_layout_Scroll.itemAt(i).widget().setParent(None)
+
+        self.entry_no = 1
+        self.generate_btn()
 
     def icons(self, folder_name):
         self.ui.main.setIcon(QIcon("icons\home.svg"))
