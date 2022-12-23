@@ -2,26 +2,65 @@ from folder_unit import Ui_Dialog
 from PyQt6.QtWidgets import *
 import sys
 from PyQt6.QtGui import *
+from passwordhelper import MainWindow_Password
+from abouthelper import MainWindow_About
 
 class MainWindow_Folder_Unit:
-    def __init__(self):
+    def __init__(self, folder_name):
         self.main_win = QDialog()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self.main_win)
 
-        self.icons()
+        self.icons(folder_name)
 
-    def icons(self):
+        self.ui.about.clicked.connect(self.open_about)
+
+        self.ui.passwordgen.clicked.connect(self.open_pass)
+
+        self.ui.passwordgen_2.clicked.connect(self.open_pass)
+
+    def open_pass(self):
+        self.password_gen = MainWindow_Password()
+        self.password_gen.show()
+
+    def open_about(self):
+        self.aboutwin = MainWindow_About()
+        self.aboutwin.show()
+
+    def view_data(self):
+        pass
+
+    def generate_btn(self):
+        pass
+
+    def refresh_btn(self):
+        pass
+
+    def icons(self, folder_name):
         self.ui.main.setIcon(QIcon("icons\home.svg"))
         self.ui.vault_2.setIcon(QIcon("icons\database.svg"))
         self.ui.passwordgen.setIcon(QIcon("icons\key.svg"))
         self.ui.create_entry.setIcon(QIcon("icons\plus-circle.svg"))
-        self.ui.create_folder.setIcon(QIcon("icons/folder-plus.svg"))
         self.ui.about.setIcon(QIcon("icons\info.svg"))
-        self.ui.create_folder_2.setIcon(QIcon("icons/folder-plus.svg"))
         self.ui.create_entry_2.setIcon(QIcon("icons\plus-circle.svg"))
         self.ui.passwordgen_2.setIcon(QIcon("icons\key.svg"))
         self.ui.stackedWidget.setCurrentWidget(self.ui.page)
+        self.length_of_folder_name = len(folder_name)
+        self.folder_name_var = ""
+        if self.length_of_folder_name >= 10:
+            self.folder_name_var = folder_name[0:10] + ".."
+        else:
+            self.folder_name_var = folder_name
+        self.folder_name1 = ""
+        if self.length_of_folder_name >= 30:
+            self.folder_name1 = folder_name[0:30] + ""
+
+        else:
+            self.folder_name1 = folder_name
+
+        self.main_win.setWindowTitle("Currently Open: " + str(self.folder_name1))
+        self.ui.label.setText(str(self.folder_name_var))
+        self.main_win.setWindowIcon(QIcon("icons/Win_icon.ico"))
 
     def show(self):
         self.main_win.show()

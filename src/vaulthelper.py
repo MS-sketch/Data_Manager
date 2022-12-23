@@ -8,6 +8,7 @@ from abouthelper import MainWindow_About
 from passwordhelper import MainWindow_Password
 from folder_helper import Mainwindow_Folderdiag
 import entry_manager as en
+from folder_unit_help import MainWindow_Folder_Unit
 
 class MainWindow:
     def __init__(self, password):
@@ -564,7 +565,9 @@ class MainWindow:
 
 
     def open_folder_contents(self, btn_name):
-        print(str(btn_name))
+        self.window_folder_pop = MainWindow_Folder_Unit(btn_name)
+        self.window_folder_pop.show()
+
 
     def lock_vault(self):
         #Encrypt Function.
