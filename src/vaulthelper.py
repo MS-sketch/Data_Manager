@@ -6,9 +6,10 @@ from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 from abouthelper import MainWindow_About
 from passwordhelper import MainWindow_Password
-from folder_helper import Mainwindow_Folderdiag
 import entry_manager as en
 from folder_unit_help import MainWindow_Folder_Unit
+from folder_helper import Mainwindow_Folderdiag
+from authcheck import MainWindow_auth
 
 
 class MainWindow:
@@ -77,6 +78,12 @@ class MainWindow:
 
         self.current_title = ""
 
+        # Defining the variables & init of the other ui elements
+        self.window_for_auth = MainWindow_auth()
+        self.window_for_pass = MainWindow_Password()
+        self.window_for_about = MainWindow_About()
+
+
     def spawn_folder_obeject(self):
         pass
 
@@ -97,7 +104,7 @@ class MainWindow:
 
     def entry_saved(self, entry_name, type_save):
         text_limit = QMessageBox()
-        text_limit.setWindowIcon(QIcon("icons\info.svg"))
+        text_limit.setWindowIcon(QIcon("icons/info.svg"))
         text_limit.setWindowTitle("Entry " + str(type_save) + "!")
 
         if len(entry_name) > 17:
@@ -145,7 +152,7 @@ class MainWindow:
 
         if len(warning_no_filled) > 0:
             text_limit = QMessageBox()
-            text_limit.setWindowIcon(QIcon("icons\info.svg"))
+            text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Required Fields Missing")
             text_limit.setText("Please fill out the necessary fields to save the entry. \n"
                                "You have not filled the following fields: " + warning_no_filled)
@@ -164,21 +171,10 @@ class MainWindow:
 
     def delete_entry_from_default(self):
         text_limit = QMessageBox()
-        text_limit.setWindowIcon(QIcon("icons\info.svg"))
+        text_limit.setWindowIcon(QIcon("icons/info.svg"))
         text_limit.setWindowTitle("Delete Entry")
-
-        if len(self.current_title) > 17:
-            text_limit.setText(
-                "Are you sure you want to delete the entry named '" + str(self.current_title[0:16]) + "...'. \n"
-                                                                                                      "DELETED "
-                                                                                                      "ENTRIES CAN'T "
-                                                                                                      "BE RECOVERED.")
-
-        else:
-            text_limit.setText("Are you sure you want to delete the entry named '" + str(self.current_title) + "'. \n"
-                                                                                                               "DELETED "
-                                                                                                               "ENTRIES CAN'T "
-                                                                                                               "BE RECOVERED.")
+        text_limit.setText("Are you sure you want to delete this entry? \n"
+                           "DELETED ENTRIES CAN'T BE RECOVERED.")
 
         text_limit.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         text_limit.setIcon(QMessageBox.Icon.Warning)
@@ -343,33 +339,33 @@ class MainWindow:
             self.entry_saved(title, "saved")
 
     def iconfix(self):
-        self.ui.main.setIcon(QIcon("icons\home.svg"))
-        self.ui.vault_2.setIcon(QIcon("icons\database.svg"))
-        self.ui.passwordgen.setIcon(QIcon("icons\key.svg"))
-        self.ui.create_entry.setIcon(QIcon("icons\plus-circle.svg"))
+        self.ui.main.setIcon(QIcon("icons/home.svg"))
+        self.ui.vault_2.setIcon(QIcon("icons/database.svg"))
+        self.ui.passwordgen.setIcon(QIcon("icons/key.svg"))
+        self.ui.create_entry.setIcon(QIcon("icons/plus-circle.svg"))
         self.ui.create_folder.setIcon(QIcon("icons/folder-plus.svg"))
-        self.ui.settings.setIcon(QIcon("icons\settings.svg"))
-        self.ui.about.setIcon(QIcon("icons\info.svg"))
-        self.ui.main_2.setIcon(QIcon("icons\lock.svg"))
-        self.ui.save_btn.setIcon(QIcon("icons\save.svg"))
+        self.ui.settings.setIcon(QIcon("icons/settings.svg"))
+        self.ui.about.setIcon(QIcon("icons/info.svg"))
+        self.ui.main_2.setIcon(QIcon("icons/lock.svg"))
+        self.ui.save_btn.setIcon(QIcon("icons/save.svg"))
         self.ui.discard.setIcon(QIcon("icons/file-minus.svg"))
         self.ui.reset.setIcon(QIcon("icons/repeat.svg"))
-        self.ui.pushButton.setIcon(QIcon("icons\eye.svg"))
-        self.ui.pushButton_2.setIcon(QIcon("icons\eye-off.svg"))
+        self.ui.pushButton.setIcon(QIcon("icons/eye.svg"))
+        self.ui.pushButton_2.setIcon(QIcon("icons/eye-off.svg"))
         self.ui.pushButton_2.setText("")
         self.ui.pushButton.setText("")
         self.ui.save_btn.setStatusTip("Save Your Work.")
         self.ui.discard.setStatusTip("Discard Your Done Work.")
         self.ui.reset.setStatusTip("Reset All The Fields.")
-        self.main_win.setWindowIcon(QIcon("icons\Win_icon.ico"))
+        self.main_win.setWindowIcon(QIcon("icons/Win_icon.ico"))
         self.main_win.setWindowTitle("Data Manager")
         self.ui.save_btn_2.setIcon(QIcon("icons/save.svg"))
         self.ui.discard_2.setIcon(QIcon("icons/delete.svg"))
         self.ui.reset_2.setIcon(QIcon("icons/file-minus.svg"))
-        self.ui.create_entry_2.setIcon(QIcon("icons\plus-circle.svg"))
+        self.ui.create_entry_2.setIcon(QIcon("icons/plus-circle.svg"))
         self.ui.create_folder_2.setIcon(QIcon("icons/folder-plus.svg"))
-        self.ui.passwordgen_2.setIcon(QIcon("icons\key.svg"))
-        self.ui.save_btn_3.setIcon(QIcon("icons\pen-tool.svg"))
+        self.ui.passwordgen_2.setIcon(QIcon("icons/key.svg"))
+        self.ui.save_btn_3.setIcon(QIcon("icons/pen-tool.svg"))
 
     def new_entry(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
@@ -409,7 +405,7 @@ class MainWindow:
 
         if title_len > 0 or website_len > 0 or user_len > 0 or password_len > 0 or notes_len > 0:
             text_limit = QMessageBox()
-            text_limit.setWindowIcon(QIcon("icons\info.svg"))
+            text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Confirmation")
             text_limit.setText("Do want to start over again?")
 
@@ -435,7 +431,7 @@ class MainWindow:
 
         if title_len > 0 or website_len > 0 or user_len > 0 or password_len > 0 or notes_len > 0:
             text_limit = QMessageBox()
-            text_limit.setWindowIcon(QIcon("icons\info.svg"))
+            text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Confirmation")
             text_limit.setText("Do you want to save your entry?")
 
@@ -453,17 +449,12 @@ class MainWindow:
             self.ui.stackedWidget.setCurrentWidget(self.ui.page)
 
     def open_password_gen(self):
-        self.window_for_pass = MainWindow_Password()
-        self.ui_for_pass = MainWindow_Password()
         self.window_for_pass.show()
 
     def open_about(self):
-        self.window_for_about = MainWindow_About()
-        self.ui_for_about = MainWindow_About()
         self.window_for_about.show()
 
     def open_newfolder(self):
-        from folder_helper import Mainwindow_Folderdiag
         self.ui_for_newfolder = Mainwindow_Folderdiag()
         self.window_for_newfolder.show()
 
@@ -474,7 +465,7 @@ class MainWindow:
 
         if folder_name_len > 300:
             text_limit = QMessageBox()
-            text_limit.setWindowIcon(QIcon("icons\info.svg"))
+            text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Length Character Error")
             text_limit.setText("The length of the folder name should be less than 300 Characters including spaces.")
 
@@ -493,7 +484,7 @@ class MainWindow:
             for x in range(len(invalid_names)):
                 if folder_name_fromstr == invalid_names[x]:
                     name_exception = QMessageBox()
-                    name_exception.setWindowIcon(QIcon("icons\info.svg"))
+                    name_exception.setWindowIcon(QIcon("icons/info.svg"))
                     name_exception.setWindowTitle("Reserved Name Error")
                     name_exception.setText("You have typed a name which is reserved for the application. \n"
                                            "RESERVED NAMES can't be used as folder or entry names.")
@@ -524,6 +515,10 @@ class MainWindow:
                 folder_name.clicked.connect(lambda: self.open_folder_contents(folder_name.objectName()))
                 self.floder_layout.addWidget(folder_name)
 
+                # Adding the folder name to the combobox choice.
+                self.ui.comboBox_2.addItem(str(folder_name.objectName()))
+                self.ui.comboBox.addItem(str(folder_name.objectName()))
+
                 self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
                 self.window_for_newfolder.folder_name_diag_win.close()
 
@@ -536,10 +531,6 @@ class MainWindow:
 
     def lock_vault(self):
         # Encrypt Function.
-
-        from authcheck import MainWindow_auth
-        self.window_for_auth = MainWindow_auth()
-        self.ui_for_auth = MainWindow_auth()
         self.main_win.close()
         try:
             self.window_for_pass.close()
