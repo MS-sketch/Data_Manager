@@ -183,7 +183,7 @@ class MainWindow:
         if button == QMessageBox.StandardButton.Yes:
             en.delete_from_index(self.current_id)
             en.delete_entry_from_default(self.current_id)
-            self.entry_saved(self.current_title, "deleted")
+            self.refresh_scroll_area()
             self.ui.stackedWidget.setCurrentWidget(self.ui.page)
 
         text_limit.close()
@@ -299,7 +299,7 @@ class MainWindow:
 
             self.btn_id = 0
 
-            self.entry_saved(str(title), "updated")
+            self.refresh_scroll_area()
 
     def refresh_scroll_area(self):
         for i in reversed(range(self.lay.count())):
