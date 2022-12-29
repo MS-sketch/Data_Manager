@@ -194,7 +194,7 @@ QPushButton:hover{
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../Data Manager/Project MEW/GUI INTERFACE/icon.qrc">
+          <iconset>
            <normaloff>:/newPrefix/icons/key.svg</normaloff>:/newPrefix/icons/key.svg</iconset>
          </property>
          <property name="iconSize">
@@ -349,7 +349,7 @@ QPushButton:hover{
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../Data Manager/Project MEW/GUI INTERFACE/icon.qrc">
+          <iconset>
            <normaloff>:/newPrefix/icons/settings.svg</normaloff>:/newPrefix/icons/settings.svg</iconset>
          </property>
          <property name="iconSize">
@@ -396,7 +396,7 @@ QPushButton:hover{
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../Data Manager/Project MEW/GUI INTERFACE/icon.qrc">
+          <iconset>
            <normaloff>:/newPrefix/icons/info.svg</normaloff>:/newPrefix/icons/info.svg</iconset>
          </property>
          <property name="iconSize">
@@ -489,7 +489,7 @@ QPushButton:hover{
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../Data Manager/Project MEW/GUI INTERFACE/icon.qrc">
+          <iconset>
            <normaloff>:/newPrefix/icons/database.svg</normaloff>:/newPrefix/icons/database.svg</iconset>
          </property>
          <property name="iconSize">
@@ -560,7 +560,7 @@ QPushButton:hover{
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../Data Manager/Project MEW/GUI INTERFACE/icon.qrc">
+          <iconset>
            <normaloff>:/newPrefix/icons/home.svg</normaloff>:/newPrefix/icons/home.svg</iconset>
          </property>
          <property name="iconSize">
@@ -923,7 +923,7 @@ QPushButton:hover{
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../Data Manager/Project MEW/GUI INTERFACE/icon.qrc">
+            <iconset>
              <normaloff>:/newPrefix/icons/key.svg</normaloff>:/newPrefix/icons/key.svg</iconset>
            </property>
            <property name="iconSize">
@@ -1260,7 +1260,7 @@ QPushButton:hover{
               </rect>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="new_save">
               <widget class="QPushButton" name="discard">
@@ -1488,7 +1488,7 @@ QPushButton:hover{
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_10">
                 <widget class="QLabel" name="label_15">

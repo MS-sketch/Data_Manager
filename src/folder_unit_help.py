@@ -5,6 +5,7 @@ from PyQt6.QtGui import *
 from passwordhelper import MainWindow_Password
 from abouthelper import MainWindow_About
 
+
 class MainWindow_Folder_Unit:
     def __init__(self, folder_name):
         self.main_win = QDialog()
@@ -24,12 +25,16 @@ class MainWindow_Folder_Unit:
 
         self.entry_no = 0
 
-    def open_pass(self):
+        self.aboutwin = MainWindow_About()
+
         self.password_gen = MainWindow_Password()
+
+        self.length_of_folder_name = None
+
+    def open_pass(self):
         self.password_gen.show()
 
     def open_about(self):
-        self.aboutwin = MainWindow_About()
         self.aboutwin.show()
 
     def view_data(self):
@@ -46,22 +51,23 @@ class MainWindow_Folder_Unit:
         self.generate_btn()
 
     def icons(self, folder_name):
-        self.ui.main.setIcon(QIcon("icons\home.svg"))
-        self.ui.vault_2.setIcon(QIcon("icons\database.svg"))
-        self.ui.passwordgen.setIcon(QIcon("icons\key.svg"))
-        self.ui.create_entry.setIcon(QIcon("icons\plus-circle.svg"))
-        self.ui.about.setIcon(QIcon("icons\info.svg"))
-        self.ui.create_entry_2.setIcon(QIcon("icons\plus-circle.svg"))
-        self.ui.passwordgen_2.setIcon(QIcon("icons\key.svg"))
+        self.ui.main.setIcon(QIcon("icons/home.svg"))
+        self.ui.vault_2.setIcon(QIcon("icons/database.svg"))
+        self.ui.passwordgen.setIcon(QIcon("icons/key.svg"))
+        self.ui.create_entry.setIcon(QIcon("icons/plus-circle.svg"))
+        self.ui.about.setIcon(QIcon("icons/info.svg"))
+        self.ui.create_entry_2.setIcon(QIcon("icons/plus-circle.svg"))
+        self.ui.passwordgen_2.setIcon(QIcon("icons/key.svg"))
         self.ui.stackedWidget.setCurrentWidget(self.ui.page)
-        self.length_of_folder_name = len(folder_name)
         self.folder_name_var = ""
-        if self.length_of_folder_name >= 10:
+        self.length_of_folder_name = len(folder_name)
+
+        if self.length_of_folder_name > 10:
             self.folder_name_var = folder_name[0:10] + ".."
         else:
             self.folder_name_var = folder_name
         self.folder_name1 = ""
-        if self.length_of_folder_name >= 30:
+        if self.length_of_folder_name > 30:
             self.folder_name1 = folder_name[0:30] + ""
 
         else:
@@ -73,6 +79,7 @@ class MainWindow_Folder_Unit:
 
     def show(self):
         self.main_win.show()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
