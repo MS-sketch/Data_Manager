@@ -2,6 +2,73 @@ import sqlite3
 import dataencryptor
 import dataencryptor as crypt
 
+def create_folder_index():
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS folder_struct(
+        folder_name TEXT PRIMARY KEY
+        )
+        """)
+
+    conn.commit()
+
+def insert_special_folder_index(folder_name):
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("INSERT INTO folder_struct VALUES (?)", [folder_name])
+
+    conn.commit()
+
+def create_special_table():
+    conn = sqlite3.connect("vault_data.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS special_dir(
+        "id" INT PRIMARY KEY,
+        "title" TEXT,
+        "website_name" TEXT,
+        "is_default" BOOL,
+        "user_name" TEXT,
+        "password" TEXT,
+        "notes" TEXT,
+        "exist_folder" TEXT NOT NULL
+        )
+
+        """)
+
+    conn.commit()
+
+def insert_in_special_dir(id, title, website, is_default, user_name, password, notes, exist_folder):
+    conn = sqlite3.connect("vault_data.db")
+    cursor = conn.cursor()
+
+    notes_val = ""
+
+    if notes == "":
+        notes_val = "NUL"
+
+    else:
+        notes_val = crypt.Encrypt(notes)
+
+    title_encrypt = crypt.Encrypt(title)
+    website_encrypt = crypt.Encrypt(str(website))
+    user_name_encrypt = crypt.Encrypt(str(user_name))
+    password_encrypt = crypt.Encrypt(str(password))
+    encrypt_exist_folder = crypt.Encrypt(str(exist_folder))
+
+    cursor.execute("INSERT INTO special_dir VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                   (id, title_encrypt, website_encrypt, is_default, user_name_encrypt, password_encrypt, notes_val, encrypt_exist_folder))
+
+    conn.commit()
+
+def fetch_from_special(id ,folder_name):
+    pass
+
 def create_blank_table():
     dataencryptor.keychk()
 
