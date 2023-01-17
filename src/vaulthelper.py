@@ -10,7 +10,7 @@ import entry_manager as en
 from folder_unit_help import MainWindow_Folder_Unit
 from folder_helper import Mainwindow_Folderdiag
 from authcheck import MainWindow_auth
-
+import configparser
 
 class MainWindow:
     def __init__(self, password):
@@ -83,8 +83,18 @@ class MainWindow:
         self.window_for_pass = MainWindow_Password()
         self.window_for_about = MainWindow_About()
 
+    def spawn_folder_object(self, name):
+        if len(name) > 17:
+            newBtn = QPushButton(str(name[0:17]) + "...")
 
-    def spawn_folder_obeject(self):
+        else:
+            newBtn = QPushButton(str(name))
+
+        newBtn.setObjectName(str(id))
+        newBtn.clicked.connect(lambda: self.open_folder_contents(newBtn.objectName()))
+        self.floder_layout.addWidget(newBtn)
+
+    def spawn_folder_items(self):
         pass
 
     def save_folder_data(self, folder_name):
@@ -418,7 +428,6 @@ class MainWindow:
             text_limit.close()
 
     def discard(self):
-
         title_len = len(self.ui.lineEdit_2.text())
 
         website_len = len(self.ui.web_address.text())
@@ -463,11 +472,16 @@ class MainWindow:
 
         folder_name_len = len(folder_name_fromstr)
 
-        if folder_name_len > 300:
+        config_file = configparser.ConfigParser()
+        f = config_file.read("config.ini")
+        content = config_file.get('Limits', 'folder_name_limit')
+
+        if folder_name_len > int(content):
             text_limit = QMessageBox()
             text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Length Character Error")
-            text_limit.setText("The length of the folder name should be less than 300 Characters including spaces.")
+            text_limit.setText("The length of the folder name should be less than "+ content +" Characters including spaces. \n"
+                               "Note: You may modify this setting by changing the settings.")
 
             text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
             text_limit.setIcon(QMessageBox.Icon.Warning)
