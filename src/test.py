@@ -12,4 +12,5 @@ for x in range(len(index)):
     y = index[x]
     print(y[0])"""
 
-sql.insert_into_index(14)
+#sql.create_special_table()
+sql.insert_special_folder_index("Mainakh")
