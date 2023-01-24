@@ -1,6 +1,23 @@
+"""
+Special Tables are the table with the ability to store the credential(s) in a folder.
+They are like their counterparts 'create table', work in a similar way except storing the folder location.
+
+"""
+
+
 import sqlite3
 import dataencryptor
 import dataencryptor as crypt
+
+def fetch_from_folder_index():
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT folder_name FROM folder_struct
+    """)
+
+    return cursor.fetchall()
 
 def create_folder_index():
     conn = sqlite3.connect("usr_settings.db")

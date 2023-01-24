@@ -12,6 +12,7 @@ from folder_helper import Mainwindow_Folderdiag
 from authcheck import MainWindow_auth
 import configparser
 
+
 class MainWindow:
     def __init__(self, password):
         self.main_win = QMainWindow()
@@ -83,6 +84,15 @@ class MainWindow:
         self.window_for_pass = MainWindow_Password()
         self.window_for_about = MainWindow_About()
 
+        self.spawn_folder_items()
+
+    def refresh_folder_area(self):
+        for i in reversed(range(self.lay.count())):
+            self.floder_layout.itemAt(i).widget().setParent(None)
+
+        self.spawn_folder_items()
+
+
     def spawn_folder_object(self, name):
         if len(name) > 17:
             newBtn = QPushButton(str(name[0:17]) + "...")
@@ -90,12 +100,18 @@ class MainWindow:
         else:
             newBtn = QPushButton(str(name))
 
-        newBtn.setObjectName(str(id))
+        newBtn.setObjectName(str(name))
         newBtn.clicked.connect(lambda: self.open_folder_contents(newBtn.objectName()))
         self.floder_layout.addWidget(newBtn)
+        # Adding the folder name to the combobox choice.
+        self.ui.comboBox_2.addItem(str(name))
+        self.ui.comboBox.addItem(str(name))
 
     def spawn_folder_items(self):
-        pass
+        folder_name = en.fetch_from_folder_index()
+        print("Index: " + str(len(folder_name)))
+        for x in range(len(folder_name)):
+            self.spawn_folder_object(folder_name[x][0])
 
     def save_folder_data(self, folder_name):
         pass
@@ -472,16 +488,18 @@ class MainWindow:
 
         folder_name_len = len(folder_name_fromstr)
 
+        # Opening the config file.
         config_file = configparser.ConfigParser()
-        f = config_file.read("config.ini")
+        config_file.read("config.ini")
         content = config_file.get('Limits', 'folder_name_limit')
 
         if folder_name_len > int(content):
             text_limit = QMessageBox()
             text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Length Character Error")
-            text_limit.setText("The length of the folder name should be less than "+ content +" Characters including spaces. \n"
-                               "Note: You may modify this setting by changing the settings.")
+            text_limit.setText(
+                "The length of the folder name should be less than " + content + " Characters including spaces. \n"
+                                                                                 "Note: You may modify this setting by changing the settings.")
 
             text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
             text_limit.setIcon(QMessageBox.Icon.Warning)
@@ -524,14 +542,10 @@ class MainWindow:
                 else:
                     folder_name_fromstrnew = folder_name_fromstr
 
-                folder_name = QPushButton(folder_name_fromstrnew)
-                folder_name.setObjectName(folder_name_fromstr)
-                folder_name.clicked.connect(lambda: self.open_folder_contents(folder_name.objectName()))
-                self.floder_layout.addWidget(folder_name)
+                en.insert_special_folder_index(folder_name_fromstrnew)
 
-                # Adding the folder name to the combobox choice.
-                self.ui.comboBox_2.addItem(str(folder_name.objectName()))
-                self.ui.comboBox.addItem(str(folder_name.objectName()))
+                self.refresh_folder_area()
+
 
                 self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
                 self.window_for_newfolder.folder_name_diag_win.close()

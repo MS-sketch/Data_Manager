@@ -6,11 +6,14 @@ def create_default_config():
     config_file.add_section("Limits")
 
     config_file.set("Limits", "folder_name_limit", "30")
+    config_file.set("Limits", "save_recently_copied_passwords", "YES")
 
     with open(r"config.ini", 'w') as config_file_obj:
         config_file.write(config_file_obj)
         config_file_obj.flush()
         config_file_obj.close()
+
+
 
 """        
 config_file = configparser.ConfigParser()
