@@ -51,8 +51,9 @@ class MainWindow_Folder_Unit:
         self.generate_btn()
 
     def icons(self, folder_name):
-        self.ui.main.setIcon(QIcon("icons/home.svg"))
-        self.ui.vault_2.setIcon(QIcon("icons/database.svg"))
+        self.ui.main.setIcon(QIcon("icons/trash.svg"))
+        self.ui.main.setToolTip("Delete folder")
+        self.ui.vault_2.hide()
         self.ui.passwordgen.setIcon(QIcon("icons/key.svg"))
         self.ui.create_entry.setIcon(QIcon("icons/plus-circle.svg"))
         self.ui.about.setIcon(QIcon("icons/info.svg"))
