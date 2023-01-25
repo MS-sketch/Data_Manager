@@ -87,11 +87,9 @@ class MainWindow:
         self.spawn_folder_items()
 
     def refresh_folder_area(self):
-        for i in reversed(range(self.lay.count())):
+        for i in reversed(range(self.floder_layout.count())):
             self.floder_layout.itemAt(i).widget().setParent(None)
-
         self.spawn_folder_items()
-
 
     def spawn_folder_object(self, name):
         if len(name) > 17:
@@ -103,15 +101,26 @@ class MainWindow:
         newBtn.setObjectName(str(name))
         newBtn.clicked.connect(lambda: self.open_folder_contents(newBtn.objectName()))
         self.floder_layout.addWidget(newBtn)
-        # Adding the folder name to the combobox choice.
-        self.ui.comboBox_2.addItem(str(name))
-        self.ui.comboBox.addItem(str(name))
+        self.add_new_items_in_combo_box(name)
 
     def spawn_folder_items(self):
         folder_name = en.fetch_from_folder_index()
-        print("Index: " + str(len(folder_name)))
         for x in range(len(folder_name)):
             self.spawn_folder_object(folder_name[x][0])
+
+    def add_new_items_in_combo_box(self, name):
+        folder_items = []
+        x = 0
+        while True:
+            y = self.ui.comboBox.itemText(x)
+            if y == '':
+                break
+            folder_items.append(y)
+            x += 1
+        if name not in folder_items:
+            # Adding the folder name to the combobox choice.
+            self.ui.comboBox_2.addItem(str(name))
+            self.ui.comboBox.addItem(str(name))
 
     def save_folder_data(self, folder_name):
         pass
@@ -535,20 +544,30 @@ class MainWindow:
                 if folder_name_fromstr == "":
                     break
 
-            if folder_name_fromstr != "":
-                if folder_name_len > 17:
-                    folder_name_fromstrnew = folder_name_fromstr[0:17] + "..."
+                if folder_name_fromstr != "":
+                    print(folder_name_fromstr)
+                    try:
+                        en.insert_special_folder_index(str(folder_name_fromstr))
+                        self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+                        self.window_for_newfolder.folder_name_diag_win.close()
+                        self.refresh_folder_area()
+                        break
+                    except:
+                        name_exception = QMessageBox()
+                        name_exception.setWindowIcon(QIcon("icons/info.svg"))
+                        name_exception.setWindowTitle("Repeated Name")
+                        name_exception.setText("A folder of same name already exists!")
 
-                else:
-                    folder_name_fromstrnew = folder_name_fromstr
+                        name_exception.setStandardButtons(QMessageBox.StandardButton.Ok)
+                        name_exception.setIcon(QMessageBox.Icon.Critical)
+                        button = name_exception.exec()
 
-                en.insert_special_folder_index(folder_name_fromstrnew)
+                        if button == QMessageBox.StandardButton.Ok:
+                            pass
+                        self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+                        name_exception.close()
 
-                self.refresh_folder_area()
-
-
-                self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
-                self.window_for_newfolder.folder_name_diag_win.close()
+                        folder_name_fromstr = ""
 
             else:
                 pass
