@@ -9,6 +9,18 @@ import sqlite3
 import dataencryptor
 import dataencryptor as crypt
 
+def delete_from_folder_index(folder_name):
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM folder_struct
+        WHERE folder_name = ?
+
+        """, (folder_name,))
+
+    conn.commit()
+
 def fetch_from_folder_index():
     conn = sqlite3.connect("usr_settings.db")
     cursor = conn.cursor()
@@ -16,6 +28,17 @@ def fetch_from_folder_index():
     cursor.execute("""
     SELECT folder_name FROM folder_struct
     """)
+
+    return cursor.fetchall()
+
+def check_from_folder_index(folder_name):
+    conn = sqlite3.connect("usr_settings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT folder_name FROM folder_struct
+    WHERE folder_name = ?
+    """, (folder_name,))
 
     return cursor.fetchall()
 
@@ -38,6 +61,7 @@ def insert_special_folder_index(folder_name):
     cursor.execute("INSERT INTO folder_struct VALUES (?)", [folder_name])
 
     conn.commit()
+    conn.close()
 
 def create_special_table():
     conn = sqlite3.connect("vault_data.db")

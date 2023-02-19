@@ -24,6 +24,8 @@ class MainWindow:
         # Encryption Key Create.
         dataencryptor.keychk()
 
+        self.password = password
+
         self.ui.scrollArea_3.setWidgetResizable(True)
 
         self.ui.stackedWidget.setCurrentIndex(0)
@@ -86,12 +88,27 @@ class MainWindow:
 
         self.spawn_folder_items()
 
+        #self.window_folder_pop.user_interface.main.clicked.connect(lambda: print("Hello"))
+
     def refresh_folder_area(self):
         for i in reversed(range(self.floder_layout.count())):
             self.floder_layout.itemAt(i).widget().setParent(None)
         self.spawn_folder_items()
 
-    def spawn_folder_object(self, name):
+    def delete_folder(self, folder_name, index_no):
+        new_del = int(index_no + 2)
+        en.delete_from_folder_index(folder_name)
+        self.delete_folder2(new_del)
+
+    def delete_folder2(self, index_number):
+        for i in reversed(range(self.floder_layout.count())):
+            self.floder_layout.itemAt(i).widget().setParent(None)
+        self.spawn_folder_items()
+
+        self.ui.comboBox.removeItem(index_number)
+        self.ui.comboBox_2.removeItem(index_number)
+
+    def spawn_folder_object(self, name, index):
         if len(name) > 17:
             newBtn = QPushButton(str(name[0:17]) + "...")
 
@@ -99,14 +116,14 @@ class MainWindow:
             newBtn = QPushButton(str(name))
 
         newBtn.setObjectName(str(name))
-        newBtn.clicked.connect(lambda: self.open_folder_contents(newBtn.objectName()))
+        newBtn.clicked.connect(lambda: self.open_folder_contents(newBtn.objectName(), index))
         self.floder_layout.addWidget(newBtn)
         self.add_new_items_in_combo_box(name)
 
     def spawn_folder_items(self):
         folder_name = en.fetch_from_folder_index()
         for x in range(len(folder_name)):
-            self.spawn_folder_object(folder_name[x][0])
+            self.spawn_folder_object(folder_name[x][0], x)
 
     def add_new_items_in_combo_box(self, name):
         folder_items = []
@@ -497,10 +514,25 @@ class MainWindow:
 
         folder_name_len = len(folder_name_fromstr)
 
-        # Opening the config file.
-        config_file = configparser.ConfigParser()
-        config_file.read("config.ini")
-        content = config_file.get('Limits', 'folder_name_limit')
+        try:
+            # Opening the config file.
+            config_file = configparser.ConfigParser()
+            config_file.read("config.ini")
+            content = int(config_file.get('Limits', 'folder_name_limit'))
+
+        except:
+            text_limit = QMessageBox()
+            text_limit.setWindowIcon(QIcon("icons/info.svg"))
+            text_limit.setWindowTitle("Corrupted Configuration File")
+            text_limit.setText("The config file is corrupted! Please check the config file.")
+
+            text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
+            text_limit.setIcon(QMessageBox.Icon.Critical)
+            button = text_limit.exec()
+
+            if button == QMessageBox.StandardButton.Ok:
+                pass
+            sys.exit(12)
 
         if folder_name_len > int(content):
             text_limit = QMessageBox()
@@ -541,39 +573,36 @@ class MainWindow:
 
                     folder_name_fromstr = ""
 
-                if folder_name_fromstr == "":
-                    break
+            if folder_name_fromstr != "":
+                entry = en.check_from_folder_index(folder_name_fromstr)
 
-                if folder_name_fromstr != "":
-                    print(folder_name_fromstr)
-                    try:
-                        en.insert_special_folder_index(str(folder_name_fromstr))
-                        self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
-                        self.window_for_newfolder.folder_name_diag_win.close()
-                        self.refresh_folder_area()
-                        break
-                    except:
-                        name_exception = QMessageBox()
-                        name_exception.setWindowIcon(QIcon("icons/info.svg"))
-                        name_exception.setWindowTitle("Repeated Name")
-                        name_exception.setText("A folder of same name already exists!")
+                if entry:
+                    name_exception = QMessageBox()
+                    name_exception.setWindowIcon(QIcon("icons/info.svg"))
+                    name_exception.setWindowTitle("Repeated Name")
+                    name_exception.setText("A folder of same name already exists!")
 
-                        name_exception.setStandardButtons(QMessageBox.StandardButton.Ok)
-                        name_exception.setIcon(QMessageBox.Icon.Critical)
-                        button = name_exception.exec()
+                    name_exception.setStandardButtons(QMessageBox.StandardButton.Ok)
+                    name_exception.setIcon(QMessageBox.Icon.Critical)
+                    button = name_exception.exec()
 
-                        if button == QMessageBox.StandardButton.Ok:
-                            pass
-                        self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
-                        name_exception.close()
+                    if button == QMessageBox.StandardButton.Ok:
+                        pass
+                    self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+                    name_exception.close()
 
-                        folder_name_fromstr = ""
+                else:
+                    en.insert_special_folder_index(str(folder_name_fromstr))
+                    self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+                    self.window_for_newfolder.folder_name_diag_win.close()
+                    self.refresh_folder_area()
+                    self.window_for_newfolder.folder_name_diag_win.close()
 
             else:
                 pass
 
-    def open_folder_contents(self, btn_name):
-        self.window_folder_pop = MainWindow_Folder_Unit(btn_name)
+    def open_folder_contents(self, btn_name, index):
+        self.window_folder_pop = MainWindow_Folder_Unit(btn_name, self.password, index)
         self.window_folder_pop.show()
 
     def lock_vault(self):

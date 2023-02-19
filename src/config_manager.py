@@ -7,6 +7,7 @@ def create_default_config():
 
     config_file.set("Limits", "folder_name_limit", "30")
     config_file.set("Limits", "save_recently_copied_passwords", "YES")
+    config_file.set("Limits", "number_of_passwords_to_save", "8")
 
     with open(r"config.ini", 'w') as config_file_obj:
         config_file.write(config_file_obj)
