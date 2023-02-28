@@ -71,7 +71,7 @@ class MainWindow:
 
         self.ui.passwordgen_2.clicked.connect(self.open_password_gen)
 
-        self.ui.reset_2.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))
+        self.ui.reset_2.clicked.connect(lambda: self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_3))
 
         self.ui.save_btn.clicked.connect(self.save_chk)
 
@@ -87,6 +87,8 @@ class MainWindow:
         self.window_for_about = MainWindow_About()
 
         self.spawn_folder_items()
+
+        self.ui.stackedWidget_2.setCurrentIndex(0)
 
         #self.window_folder_pop.user_interface.main.clicked.connect(lambda: print("Hello"))
 
@@ -154,28 +156,7 @@ class MainWindow:
             if input_barrier:
                 self.open_newfolder()
 
-    def entry_saved(self, entry_name, type_save):
-        text_limit = QMessageBox()
-        text_limit.setWindowIcon(QIcon("icons/info.svg"))
-        text_limit.setWindowTitle("Entry " + str(type_save) + "!")
-
-        if len(entry_name) > 17:
-            text_limit.setText(
-                "Your entry named '" + str(entry_name[0:16]) + "...' has been successfully " + str(type_save) + ".")
-
-        elif len(entry_name) < 17:
-            text_limit.setText(
-                "Your entry named '" + str(entry_name) + "' has been successfully " + str(type_save) + ".")
-
-        text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
-        text_limit.setIcon(QMessageBox.Icon.Information)
-        button = text_limit.exec()
-
-        if button == QMessageBox.StandardButton.Ok:
-            pass
-
-        text_limit.close()
-
+    def entry_saved(self):
         self.refresh_scroll_area()
 
     def data_check(self):
@@ -236,7 +217,7 @@ class MainWindow:
             en.delete_from_index(self.current_id)
             en.delete_entry_from_default(self.current_id)
             self.refresh_scroll_area()
-            self.ui.stackedWidget.setCurrentWidget(self.ui.page)
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_3)
 
         text_limit.close()
 
@@ -264,9 +245,9 @@ class MainWindow:
         password = entry_point[5]
         notes = entry_point[6]
 
-        self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
+        self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_4)
 
-        self.ui.stackedWidget_3.setCurrentWidget(self.ui.edit_save)
+        self.ui.stackedWidget_4.setCurrentWidget(self.ui.edit_save)
 
         self.ui.lineEdit_2.setText(str(title))
         self.ui.web_address.setText(str(website))
@@ -291,7 +272,7 @@ class MainWindow:
         self.read_mode()
 
     def read_mode(self):
-        self.ui.stackedWidget_4.setCurrentWidget(self.ui.page_11)
+        self.ui.stackedWidget_5.setCurrentWidget(self.ui.page_11)
         self.ui.lineEdit_2.setReadOnly(True)
         self.ui.web_address.setReadOnly(True)
         self.ui.user_name.setReadOnly(True)
@@ -382,13 +363,13 @@ class MainWindow:
 
             en.insert_in_default(id_no, title, website, ischeck, usr_name, password, notes)
 
-            self.ui.stackedWidget.setCurrentWidget(self.ui.page)
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_3)
 
             self.entry_number = id_no
 
             en.insert_into_index(id_no)
 
-            self.entry_saved(title, "saved")
+            self.entry_saved()
 
     def iconfix(self):
         self.ui.main.setIcon(QIcon("icons/home.svg"))
@@ -420,8 +401,8 @@ class MainWindow:
         self.ui.save_btn_3.setIcon(QIcon("icons/pen-tool.svg"))
 
     def new_entry(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.page_2)
-        self.ui.stackedWidget_3.setCurrentWidget(self.ui.new_save)
+        self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_4)
+        self.ui.stackedWidget_4.setCurrentWidget(self.ui.new_save)
         self.set_all_disabled()
         self.reset_all()
 
@@ -432,7 +413,7 @@ class MainWindow:
         self.ui.lineEdit_3.setReadOnly(False)
         self.ui.notes.setReadOnly(False)
         self.ui.primary_websitedomain.show()
-        self.ui.stackedWidget_4.setCurrentWidget(self.ui.page_10)
+        self.ui.stackedWidget_5.setCurrentWidget(self.ui.page_10)
 
     def reset_all(self):
         self.ui.lineEdit_2.setText("")
@@ -491,13 +472,13 @@ class MainWindow:
             button = text_limit.exec()
 
             if button == QMessageBox.StandardButton.No:
-                self.ui.stackedWidget.setCurrentWidget(self.ui.page)
+                self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_3)
                 self.reset_all()
 
             text_limit.close()
 
         else:
-            self.ui.stackedWidget.setCurrentWidget(self.ui.page)
+            self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_3)
 
     def open_password_gen(self):
         self.window_for_pass.show()
@@ -539,8 +520,8 @@ class MainWindow:
             text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Length Character Error")
             text_limit.setText(
-                "The length of the folder name should be less than " + content + " Characters including spaces. \n"
-                                                                                 "Note: You may modify this setting by changing the settings.")
+                "The length of the folder name should be less than " + str(content) + " Characters including spaces. \n"
+                                                        "Note: You may modify this setting by changing the settings.")
 
             text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
             text_limit.setIcon(QMessageBox.Icon.Warning)
