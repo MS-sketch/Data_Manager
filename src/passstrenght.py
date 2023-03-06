@@ -33,8 +33,8 @@ def passwordstrenght(input):
             ((hasLower or hasDigit or hasUpper or specialChar) and n >= 14):
         return "moderate"
     else:
-        return "strong"
-        #return "weak"
+        #return "strong"
+        return "weak"
 
 def strengthinfo(password1):
     from passwordstrength import Ui_Dialog
