@@ -10,6 +10,8 @@ import hashlib
 import passstrenght
 from datetime import datetime
 import entry_manager
+import configparser
+import config_manager
 
 database_existence = existance.exists("usr_settings.db")
 password_vault = existance.exists("password.txt.aes")
@@ -23,6 +25,7 @@ class MainWindow_auth:
 
         entry_manager.index_entry()
         entry_manager.create_blank_table()
+        config_manager.create_default_config()
 
         #Bug Prob
         self.ui.MainstackedWidget.setCurrentWidget(self.ui.master_password_single_user)
@@ -72,6 +75,17 @@ class MainWindow_auth:
         else:
             self.new_user()
 
+    def dev_mode(self):
+        config_file = configparser.ConfigParser()
+        config_file.read("config.ini")
+        content = int(config_file.get('Dev', 'password_check'))
+
+        if content == 1:
+            return True
+
+        else:
+            return False
+
     def forgot_pass(self):
         self.ui.MainstackedWidget.setCurrentWidget(self.ui.page_7)
         self.reset()
@@ -85,24 +99,59 @@ class MainWindow_auth:
         else:
             self.ui.unlock_btn.setEnabled(True)
 
+
     def login(self):
         self.ui.stackedWidgetmp.setCurrentWidget(self.ui.page_2)
         password_entered_by_usr = self.ui.master_password_single_user.text()
-        hashedpass = hashlib.sha256(password_entered_by_usr.encode("utf-8")).hexdigest()
+        if len(password_entered_by_usr) > 0:
+            hashedpass = hashlib.sha256(password_entered_by_usr.encode("utf-8")).hexdigest()
 
-        info2 = entry_manager.getmasterpassword(hashedpass)
+            info2 = entry_manager.getmasterpassword(hashedpass)
 
-        if info2:
-            self.ui.stackedWidgetmp.setCurrentWidget(self.ui.page_2)
-            self.ui.forgot_password.setDisabled(True)
-            self.ui.unlock_btn.setDisabled(True)
-            self.ui.master_password_single_user.setDisabled(True)
+            check = self.dev_mode()
 
-            self.open_vault(password_entered_by_usr)
+            strength = passstrenght.passwordstrenght(password_entered_by_usr)
 
-        else:
-            if len(password_entered_by_usr) > 0:
-                self.ui.stackedWidgetmp.setCurrentWidget(self.ui.wrongpass_enter)
+            if check == False:
+                if strength == "weak":
+                    text_limit = QMessageBox()
+                    text_limit.setWindowIcon(QIcon("icons/info.svg"))
+                    text_limit.setWindowTitle("Error")
+                    text_limit.setText("An Error Occurred. \nError Code: 23")
+
+                    text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
+                    text_limit.setIcon(QMessageBox.Icon.Critical)
+                    button = text_limit.exec()
+
+                    if button == QMessageBox.StandardButton.Ok:
+                        pass
+                    sys.exit(23)
+
+                else:
+                    if info2:
+                        self.ui.stackedWidgetmp.setCurrentWidget(self.ui.page_2)
+                        self.ui.forgot_password.setDisabled(True)
+                        self.ui.unlock_btn.setDisabled(True)
+                        self.ui.master_password_single_user.setDisabled(True)
+
+                        self.open_vault(password_entered_by_usr)
+
+                    else:
+                        if len(password_entered_by_usr) > 0:
+                            self.ui.stackedWidgetmp.setCurrentWidget(self.ui.wrongpass_enter)
+
+            if check == True:
+                if info2:
+                    self.ui.stackedWidgetmp.setCurrentWidget(self.ui.page_2)
+                    self.ui.forgot_password.setDisabled(True)
+                    self.ui.unlock_btn.setDisabled(True)
+                    self.ui.master_password_single_user.setDisabled(True)
+
+                    self.open_vault(password_entered_by_usr)
+
+                else:
+                    if len(password_entered_by_usr) > 0:
+                        self.ui.stackedWidgetmp.setCurrentWidget(self.ui.wrongpass_enter)
 
     def enable_create(self):
         password = self.ui.create_single_user_password_line_1.text()
