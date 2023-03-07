@@ -38,7 +38,7 @@ class MainWindow_About:
     def css(self):
         self.main_win.setWindowIcon(QIcon("icons\Win_icon.ico"))
         self.main_win.setWindowTitle("About Data Manager")
-        self.ui.label_12.setText("Current Version \n  \n         1.2")
+        self.ui.label_12.setText("Current Version \n  \n         1.39")
 
 
 
