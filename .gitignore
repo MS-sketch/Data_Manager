@@ -4,3 +4,5 @@
 *.db
 /.idea
 *.ini
+*.iss
+src/dm_help.docx
