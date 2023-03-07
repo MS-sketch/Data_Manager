@@ -13,6 +13,7 @@ import entry_manager
 import configparser
 import config_manager
 
+
 database_existence = existance.exists("usr_settings.db")
 password_vault = existance.exists("password.txt.aes")
 
@@ -26,6 +27,9 @@ class MainWindow_auth:
         entry_manager.index_entry()
         entry_manager.create_blank_table()
         config_manager.create_default_config()
+
+        #Create Table Folder Struct.
+        entry_manager.create_folder_index()
 
         #Bug Prob
         self.ui.MainstackedWidget.setCurrentWidget(self.ui.master_password_single_user)
@@ -155,24 +159,31 @@ class MainWindow_auth:
 
     def enable_create(self):
         password = self.ui.create_single_user_password_line_1.text()
-        if len(password) > 0:
-            strength = passstrenght.passwordstrenght(password)
 
-            if strength == "weak":
-                self.ui.substackedWidget.setCurrentWidget(self.ui.page_4)
-                self.ui.create_new_user_btn.setDisabled(True)
+        check = self.dev_mode()
 
-            elif strength == "moderate":
-                self.ui.substackedWidget.setCurrentWidget(self.ui.page_5)
-                self.ui.create_new_user_btn.setEnabled(True)
-
-            elif strength == "strong":
-                self.ui.substackedWidget.setCurrentWidget(self.ui.page_6)
-                self.ui.create_new_user_btn.setEnabled(True)
+        if check == True:
+            self.ui.create_new_user_btn.setEnabled(True)
 
         else:
-            self.ui.create_new_user_btn.setDisabled(True)
-            self.ui.substackedWidget.setCurrentWidget(self.ui.page_3)
+            if len(password) > 0:
+                strength = passstrenght.passwordstrenght(password)
+
+                if strength == "weak":
+                    self.ui.substackedWidget.setCurrentWidget(self.ui.page_4)
+                    self.ui.create_new_user_btn.setDisabled(True)
+
+                elif strength == "moderate":
+                    self.ui.substackedWidget.setCurrentWidget(self.ui.page_5)
+                    self.ui.create_new_user_btn.setEnabled(True)
+
+                elif strength == "strong":
+                    self.ui.substackedWidget.setCurrentWidget(self.ui.page_6)
+                    self.ui.create_new_user_btn.setEnabled(True)
+
+            else:
+                self.ui.create_new_user_btn.setDisabled(True)
+                self.ui.substackedWidget.setCurrentWidget(self.ui.page_3)
 
     def new_user(self):
         self.ui.MainstackedWidget.setCurrentWidget(self.ui.newuser)
@@ -198,6 +209,7 @@ class MainWindow_auth:
 
                     entry_manager.masterpasswordsave(hasheddata)
 
+                    print(newpass)
                     self.open_vault(newpass)
 
 
@@ -223,6 +235,7 @@ class MainWindow_auth:
 
 
     def reset(self):
+        
         self.ui.MainstackedWidget.setCurrentWidget(self.ui.page_7)
         self.ui.create_new_user_btn_7.clicked.connect(self.warn_user_reset)
         self.ui.create_new_user_btn_8.clicked.connect(self.main_window)
