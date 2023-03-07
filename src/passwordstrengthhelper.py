@@ -1,10 +1,10 @@
 from passwordstrength import Ui_Dialog
-from PyQt6.QtWidgets import QApplication
-from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QDialog
+from PyQt5.QtWidgets import QApplication
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog
 import sys
 from PySide6 import QtCore
-from PyQt6.QtGui import *
+from PyQt5.QtGui import *
 
 class MainWindow:
     def __init__(self, password1, crack_usr_speed):

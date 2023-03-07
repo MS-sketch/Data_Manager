@@ -1,8 +1,8 @@
 import sys
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtWidgets import QDialog
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QDialog
 from error import Ui_Dialog
-from PyQt6.QtGui import *
+from PyQt5.QtGui import *
 
 class MainWindow:
     def __init__(self, errormsg):

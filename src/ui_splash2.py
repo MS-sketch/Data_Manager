@@ -1,10 +1,10 @@
 import sys
-from PySide6 import QtCore
-from PySide6.QtGui import (QIcon)
-from PySide6.QtWidgets import (QApplication,QMainWindow,QDialog)
+from PySide2 import QtCore
+from PySide2.QtGui import (QIcon)
+from PySide2.QtWidgets import (QApplication,QMainWindow,QDialog)
 from splash import Ui_MainWindow
-from PyQt6.QtWidgets import QMessageBox
-from PyQt6.QtGui import QIcon
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtGui import QIcon
 from authcheck import MainWindow_auth
 
 class authentication(QDialog):

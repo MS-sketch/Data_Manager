@@ -5,15 +5,15 @@ not to change the code if you don't know what are you doing.
 
 
 import sys
-from PyQt6.QtWidgets import QApplication
-from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QDialog
+from PyQt5.QtWidgets import QApplication
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog
 import random
 from passwordui import Ui_Dialog
 import pyperclip
 import passstrenght
-from PyQt6.QtGui import *
-from PyQt6.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 class MainWindow_Password:
 

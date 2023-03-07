@@ -1,7 +1,7 @@
 from folder_unit import Ui_Dialog
-from PyQt6.QtWidgets import *
+from PyQt5.QtWidgets import *
 import sys
-from PyQt6.QtGui import *
+from PyQt5.QtGui import *
 from passwordhelper import MainWindow_Password
 from abouthelper import MainWindow_About
 import entry_manager as en

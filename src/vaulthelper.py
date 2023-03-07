@@ -2,8 +2,8 @@ import sys
 import dataencryptor
 import entry_manager
 from vaultui import Ui_MainWindow
-from PyQt6.QtGui import *
-from PyQt6.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 from abouthelper import MainWindow_About
 from passwordhelper import MainWindow_Password
 import entry_manager as en

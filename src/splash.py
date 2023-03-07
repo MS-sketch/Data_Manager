@@ -1,16 +1,16 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QSizeGrip, QMainWindow
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QSizeGrip, QMainWindow
 import sys
-import PySide6
-from PySide6 import QtCore, QtGui, QtWidgets
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+import PySide2
+from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QMainWindow,
+from PySide2.QtWidgets import (QApplication, QFrame, QLabel, QMainWindow,
     QProgressBar, QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
