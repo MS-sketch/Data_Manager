@@ -1,0 +1,6 @@
+*.png
+*.spec
+*.key
+*.db
+/.idea
+*.ini
