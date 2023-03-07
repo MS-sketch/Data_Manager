@@ -14,9 +14,6 @@ import configparser
 import config_manager
 
 
-database_existence = existance.exists("usr_settings.db")
-password_vault = existance.exists("password.txt.aes")
-
 class MainWindow_auth:
     def __init__(self):
         self.win = None
@@ -68,16 +65,16 @@ class MainWindow_auth:
         self.ui.pushButton_2.clicked.connect(self.show_password_info)
 
 
-        if database_existence == "TRUE":
-            if os.stat("usr_settings.db").st_size == 0:
-                self.new_user()
+        master_pass_exist = entry_manager.master_existance()
 
-            elif os.stat("usr_settings.db").st_size > 0:
-                self.ui.MainstackedWidget.setCurrentWidget(self.ui.login)
-                self.login()
+        if master_pass_exist == False:
+            self.new_user()
+
 
         else:
-            self.new_user()
+            self.ui.MainstackedWidget.setCurrentWidget(self.ui.login)
+            self.login()
+
 
     def dev_mode(self):
         config_file = configparser.ConfigParser()
