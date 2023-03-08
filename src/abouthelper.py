@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtGui import QIcon
 from about import Ui_About
+import os
 
 class MainWindow_About:
     def __init__(self):
@@ -16,9 +17,8 @@ class MainWindow_About:
         self.ui.tabWidget.setCurrentIndex(0)
         self.ui.stackedWidget_upd.setCurrentWidget(self.ui.app_ver)
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_3)
-        self.ui.tabWidget_2.setCurrentIndex(0)
 
-
+        self.ui.pushButton_2.clicked.connect(self.open_help)
 
         #Software Update
         self.ui.pushButton_6.clicked.connect(self.openupd)
@@ -40,7 +40,12 @@ class MainWindow_About:
         self.main_win.setWindowTitle("About Data Manager")
         self.ui.label_12.setText("Current Version \n  \n         1.39")
 
+    def open_help(self):
+        try:
+            os.startfile(os.getcwd()+ "/docs/help.chm")
 
+        except:
+            pass
 
     def close(self):
         self.main_win.close()
