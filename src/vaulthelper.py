@@ -187,7 +187,7 @@ class MainWindow:
             text_limit = QMessageBox()
             text_limit.setWindowIcon(QIcon("icons/info.svg"))
             text_limit.setWindowTitle("Required Fields Missing")
-            text_limit.setText("Please fill out the necessary fields to save the entry. \n"
+            text_limit.setText("Please fill out the necessary fields to save the entry. \nError Code 02 \n"
                                "You have not filled the following fields: " + warning_no_filled)
 
             text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
@@ -399,6 +399,11 @@ class MainWindow:
         self.ui.create_folder_2.setIcon(QIcon("icons/folder-plus.svg"))
         self.ui.passwordgen_2.setIcon(QIcon("icons/key.svg"))
         self.ui.save_btn_3.setIcon(QIcon("icons/pen-tool.svg"))
+        self.ui.main_6.setIcon(QIcon("icons/home.svg"))
+        self.ui.passwordgen_7.setIcon(QIcon("icons/key.svg"))
+        self.ui.create_entry_7.setIcon(QIcon("icons/plus-circle.svg"))
+        self.ui.create_entry_8.setIcon(QIcon("icons/plus-circle.svg"))
+        self.ui.passwordgen_8.setIcon(QIcon("icons/key.svg"))
 
     def new_entry(self):
         self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_4)
@@ -504,8 +509,8 @@ class MainWindow:
         except:
             text_limit = QMessageBox()
             text_limit.setWindowIcon(QIcon("icons/info.svg"))
-            text_limit.setWindowTitle("Corrupted Configuration File")
-            text_limit.setText("The config file is corrupted! Please check the config file.")
+            text_limit.setWindowTitle("Error")
+            text_limit.setText("Error Code: 03.")
 
             text_limit.setStandardButtons(QMessageBox.StandardButton.Ok)
             text_limit.setIcon(QMessageBox.Icon.Critical)
@@ -583,8 +588,9 @@ class MainWindow:
                 pass
 
     def open_folder_contents(self, btn_name, index):
-        self.window_folder_pop = MainWindow_Folder_Unit(btn_name, self.password, index)
-        self.window_folder_pop.show()
+        self.ui.stackedWidget.setCurrentIndex(1)
+        #self.window_folder_pop = MainWindow_Folder_Unit(btn_name, self.password, index)
+        #self.window_folder_pop.show()
 
     def lock_vault(self):
         # Encrypt Function.

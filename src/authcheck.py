@@ -3,7 +3,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QDialog
-import existance
 from newauth import Ui_Dialog
 import os
 import hashlib
@@ -265,7 +264,6 @@ class MainWindow_auth:
             os.remove("usr_settings.db")
             os.remove("universal.key")
             os.remove("vault_data.db")
-            print("OK")
 
         except:
             return 1
@@ -295,9 +293,7 @@ class MainWindow_auth:
             error = QMessageBox()
             error.setWindowIcon(QIcon("icons\info.svg"))
             error.setWindowTitle("Information")
-            error.setText("Sorry, but it appears that the password you have entered is of '" + str(lenofpass) +
-                          "' length which is not a valid natural number. \n"
-                          "If you encounter this problem repeatedly then please reinstall the application.")
+            error.setText("Not a valid number. \nError Code: 01")
 
             error.setStandardButtons(QMessageBox.StandardButton.Ok)
             error.setIcon(QMessageBox.Icon.Critical)
