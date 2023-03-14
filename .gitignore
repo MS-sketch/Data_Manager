@@ -10,3 +10,6 @@ src/build
 src/dist
 /help_file
 /help_file_output
+/Docs
+/Docs_output
+/test
