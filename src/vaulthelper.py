@@ -90,7 +90,23 @@ class MainWindow:
 
         self.ui.stackedWidget_2.setCurrentIndex(0)
 
-        #self.window_folder_pop.user_interface.main.clicked.connect(lambda: print("Hello"))
+        self.ui.main_6.clicked.connect(self.back_to_main)
+
+        self.ui.passwordgen_7.clicked.connect(self.open_password_gen)
+
+        self.ui.create_entry_7.clicked.connect(self.create_entry_in_folder)
+
+        self.ui.passwordgen_8.clicked.connect(self.open_password_gen)
+
+        self.ui.create_entry_8.clicked.connect(self.create_entry_in_folder)
+
+    def create_entry_in_folder(self):
+        self.ui.stackedWidget_18.setCurrentWidget(self.ui.page_42)
+
+    def back_to_main(self):
+        self.ui.stackedWidget.setCurrentIndex(0)
+        self.main_win.setWindowTitle("Data Manager")
+        self.ui.stackedWidget_18.setCurrentWidget(self.ui.page_41)
 
     def refresh_folder_area(self):
         for i in reversed(range(self.floder_layout.count())):
@@ -589,8 +605,11 @@ class MainWindow:
 
     def open_folder_contents(self, btn_name, index):
         self.ui.stackedWidget.setCurrentIndex(1)
-        #self.window_folder_pop = MainWindow_Folder_Unit(btn_name, self.password, index)
-        #self.window_folder_pop.show()
+        if len(btn_name) < 17:
+            self.main_win.setWindowTitle("Currently Open: " + str(btn_name))
+
+        else:
+            self.main_win.setWindowTitle("Currently Open: " + str(btn_name[0:17]) + "...")
 
     def lock_vault(self):
         # Encrypt Function.
