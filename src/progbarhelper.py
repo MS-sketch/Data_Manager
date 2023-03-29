@@ -1,7 +1,7 @@
 import sys
 import time
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QDialog
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QDialog
 from progbar import Ui_Dialog
 
 class MainWindow:

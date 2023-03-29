@@ -1,8 +1,8 @@
 from foldername_ui import Ui_Dialog
 import sys
-from PyQt5.QtWidgets import QDialog
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QIcon
+from PyQt6.QtWidgets import QDialog
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QIcon
 
 class Mainwindow_Folderdiag:
 
