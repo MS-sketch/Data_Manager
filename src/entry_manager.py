@@ -13,6 +13,7 @@ def delete_from_folder_index(folder_name):
     conn = sqlite3.connect("usr_settings.db")
     cursor = conn.cursor()
 
+
     cursor.execute("""
         DELETE FROM folder_struct
         WHERE folder_name = ?

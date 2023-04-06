@@ -4,12 +4,3 @@
 *.db
 /.idea
 *.ini
-*.iss
-src/dm_help.docx
-src/build
-src/dist
-/help_file
-/help_file_output
-/Docs
-/Docs_output
-/test
