@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.frame_2 = QtWidgets.QFrame(self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(1, 170, 111, 171))
+        self.frame_2.setGeometry(QtCore.QRect(0, 10, 111, 171))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
         self.create_entry = QtWidgets.QPushButton(self.frame_2)
-        self.create_entry.setGeometry(QtCore.QRect(10, 120, 41, 31))
+        self.create_entry.setGeometry(QtCore.QRect(20, 120, 61, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.create_entry.setFont(font)
@@ -112,25 +112,6 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.create_folder = QtWidgets.QPushButton(self.frame_2)
-        self.create_folder.setGeometry(QtCore.QRect(60, 120, 41, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.create_folder.setFont(font)
-        self.create_folder.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.create_folder.setToolTip("Create New Folder")
-        self.create_folder.setStyleSheet("QPushButton{\n"
-"  border: 1.5px solid black;\n"
-"  border-radius: 15px;\n"
-"  padding: 5px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"  background-color: rgb(213, 213, 213);  \n"
-"}")
-        self.create_folder.setText("")
-        self.create_folder.setIcon(icon)
-        self.create_folder.setIconSize(QtCore.QSize(24, 24))
-        self.create_folder.setObjectName("create_folder")
         self.label_13 = QtWidgets.QLabel(self.frame_2)
         self.label_13.setGeometry(QtCore.QRect(30, 90, 51, 21))
         font = QtGui.QFont()
@@ -138,7 +119,7 @@ class Ui_MainWindow(object):
         self.label_13.setFont(font)
         self.label_13.setObjectName("label_13")
         self.frame_3 = QtWidgets.QFrame(self.frame)
-        self.frame_3.setGeometry(QtCore.QRect(1, 320, 111, 181))
+        self.frame_3.setGeometry(QtCore.QRect(0, 190, 111, 181))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -148,29 +129,8 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
-        self.settings = QtWidgets.QPushButton(self.frame_3)
-        self.settings.setGeometry(QtCore.QRect(20, 70, 61, 41))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.settings.setFont(font)
-        self.settings.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.settings.setToolTip("Open Settings")
-        self.settings.setStyleSheet("QPushButton{\n"
-"  border: 1.5px solid black;\n"
-"  border-radius: 15px;\n"
-"  padding: 5px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"  background-color: rgb(213, 213, 213);  \n"
-"}")
-        self.settings.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(":/newPrefix/icons/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.settings.setIcon(icon2)
-        self.settings.setIconSize(QtCore.QSize(24, 24))
-        self.settings.setObjectName("settings")
         self.about = QtWidgets.QPushButton(self.frame_3)
-        self.about.setGeometry(QtCore.QRect(20, 130, 61, 41))
+        self.about.setGeometry(QtCore.QRect(20, 60, 61, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.about.setFont(font)
@@ -185,9 +145,9 @@ class Ui_MainWindow(object):
 "  background-color: rgb(213, 213, 213);  \n"
 "}")
         self.about.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(":/newPrefix/icons/info.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.about.setIcon(icon3)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/newPrefix/icons/info.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.about.setIcon(icon2)
         self.about.setIconSize(QtCore.QSize(24, 24))
         self.about.setObjectName("about")
         self.label_3 = QtWidgets.QLabel(self.frame_3)
@@ -196,67 +156,6 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
-        self.allentry = QtWidgets.QFrame(self.frame)
-        self.allentry.setGeometry(QtCore.QRect(1, 10, 101, 171))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.allentry.sizePolicy().hasHeightForWidth())
-        self.allentry.setSizePolicy(sizePolicy)
-        self.allentry.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.allentry.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.allentry.setObjectName("allentry")
-        self.vault_2 = QtWidgets.QPushButton(self.allentry)
-        self.vault_2.setGeometry(QtCore.QRect(20, 100, 61, 41))
-        self.vault_2.setMinimumSize(QtCore.QSize(0, 0))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.vault_2.setFont(font)
-        self.vault_2.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.vault_2.setToolTip("Shows All Stored Data")
-        self.vault_2.setStyleSheet("QPushButton{\n"
-"  border: 1.5px solid black;\n"
-"  border-radius: 15px;\n"
-"  padding: 5px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"  background-color: rgb(213, 213, 213);  \n"
-"}")
-        self.vault_2.setText("")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(":/newPrefix/icons/database.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.vault_2.setIcon(icon4)
-        self.vault_2.setIconSize(QtCore.QSize(24, 24))
-        self.vault_2.setObjectName("vault_2")
-        self.label = QtWidgets.QLabel(self.allentry)
-        self.label.setGeometry(QtCore.QRect(20, 16, 71, 20))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.main = QtWidgets.QPushButton(self.allentry)
-        self.main.setGeometry(QtCore.QRect(20, 50, 61, 41))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.main.setFont(font)
-        self.main.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.main.setToolTip("Open Main")
-        self.main.setToolTipDuration(-1)
-        self.main.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.main.setStyleSheet("QPushButton{\n"
-"  border: 1.5px solid black;\n"
-"  border-radius: 15px;\n"
-"  padding: 5px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"  background-color: rgb(213, 213, 213);  \n"
-"}")
-        self.main.setText("")
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/newPrefix/icons/home.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.main.setIcon(icon5)
-        self.main.setIconSize(QtCore.QSize(24, 24))
-        self.main.setObjectName("main")
         self.line = QtWidgets.QFrame(self.frame)
         self.line.setGeometry(QtCore.QRect(0, -1, 110, 20))
         self.line.setFrameShadow(QtWidgets.QFrame.Plain)
@@ -277,6 +176,46 @@ class Ui_MainWindow(object):
         self.line_4.setFrameShadow(QtWidgets.QFrame.Plain)
         self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_4.setObjectName("line_4")
+        self.settings = QtWidgets.QPushButton(self.frame)
+        self.settings.setGeometry(QtCore.QRect(20, 470, 61, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.settings.setFont(font)
+        self.settings.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.settings.setToolTip("Open Settings")
+        self.settings.setStyleSheet("QPushButton{\n"
+"  border: 1.5px solid black;\n"
+"  border-radius: 15px;\n"
+"  padding: 5px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"  background-color: rgb(213, 213, 213);  \n"
+"}")
+        self.settings.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/newPrefix/icons/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.settings.setIcon(icon3)
+        self.settings.setIconSize(QtCore.QSize(24, 24))
+        self.settings.setObjectName("settings")
+        self.create_folder = QtWidgets.QPushButton(self.frame)
+        self.create_folder.setGeometry(QtCore.QRect(30, 400, 41, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.create_folder.setFont(font)
+        self.create_folder.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.create_folder.setToolTip("Create New Folder")
+        self.create_folder.setStyleSheet("QPushButton{\n"
+"  border: 1.5px solid black;\n"
+"  border-radius: 15px;\n"
+"  padding: 5px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"  background-color: rgb(213, 213, 213);  \n"
+"}")
+        self.create_folder.setText("")
+        self.create_folder.setIcon(icon)
+        self.create_folder.setIconSize(QtCore.QSize(24, 24))
+        self.create_folder.setObjectName("create_folder")
         self.component = QtWidgets.QFrame(self.Main)
         self.component.setGeometry(QtCore.QRect(110, 0, 851, 541))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -773,9 +712,9 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "  background-color: rgb(213, 213, 213);  \n"
 "}")
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("../Data Manager/Project MEW/GUI INTERFACE/icons/lock.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.main_2.setIcon(icon6)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("../Data Manager/Project MEW/GUI INTERFACE/icons/lock.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.main_2.setIcon(icon4)
         self.main_2.setIconSize(QtCore.QSize(24, 24))
         self.main_2.setObjectName("main_2")
         self.stackedWidget_search = QtWidgets.QStackedWidget(self.component)
@@ -906,6 +845,8 @@ class Ui_MainWindow(object):
 "  background-color: rgb(213, 213, 213);  \n"
 "}")
         self.main_6.setText("")
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/newPrefix/icons/home.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.main_6.setIcon(icon5)
         self.main_6.setIconSize(QtCore.QSize(24, 24))
         self.main_6.setObjectName("main_6")
@@ -1354,7 +1295,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(1)
         self.stackedWidget_3.setCurrentIndex(0)
@@ -1383,14 +1324,11 @@ class Ui_MainWindow(object):
         self.passwordgen.setAccessibleName(_translate("MainWindow", "Generate Passwords"))
         self.passwordgen.setAccessibleDescription(_translate("MainWindow", "Generate Passwords"))
         self.label_2.setText(_translate("MainWindow", "New Entry"))
-        self.create_folder.setStatusTip(_translate("MainWindow", "Create New Folder"))
         self.label_13.setText(_translate("MainWindow", "Create"))
-        self.settings.setStatusTip(_translate("MainWindow", "Open Settings"))
         self.about.setStatusTip(_translate("MainWindow", "About Data Manager"))
         self.label_3.setText(_translate("MainWindow", "More"))
-        self.vault_2.setStatusTip(_translate("MainWindow", "Open All Your Stored Data"))
-        self.label.setText(_translate("MainWindow", "All Entries"))
-        self.main.setStatusTip(_translate("MainWindow", "Open The Main Menu"))
+        self.settings.setStatusTip(_translate("MainWindow", "Open Settings"))
+        self.create_folder.setStatusTip(_translate("MainWindow", "Create New Folder"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Entries), _translate("MainWindow", "Entries"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.FolderSelection), _translate("MainWindow", "Folder Selection"))
         self.label_8.setText(_translate("MainWindow", "Nothing Here, Create Something New?"))
@@ -1471,8 +1409,6 @@ class Ui_MainWindow(object):
         self.pushButton_10.setText(_translate("MainWindow", "C"))
         self.pushButton_11.setText(_translate("MainWindow", "C"))
         self.lineEdit_12.setPlaceholderText(_translate("MainWindow", "Search Through You Entries"))
-        #import icon_rc
-
 
 if __name__ == "__main__":
     import sys

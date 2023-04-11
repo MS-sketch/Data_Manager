@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import *
 from abouthelper import MainWindow_About
 from passwordhelper import MainWindow_Password
 import entry_manager as en
-from folder_unit_help import MainWindow_Folder_Unit
 from folder_helper import Mainwindow_Folderdiag
 from authcheck import MainWindow_auth
 import configparser
@@ -20,6 +19,17 @@ class MainWindow:
         self.ui.setupUi(self.main_win)
 
         self.iconfix()
+
+        self.ui.settings.hide()
+        self.ui.stackedWidget_search.hide()
+        self.ui.create_folder_2.hide()
+        self.ui.label_17.hide()
+        self.ui.stackedWidget_7.hide()
+        self.ui.stackedWidget_6.hide()
+        self.ui.stackedWidget_3.hide()
+
+        self.ui.tabWidget.removeTab(1)
+        self.ui.create_folder.hide()
 
         # Encryption Key Create.
         dataencryptor.keychk()
@@ -388,8 +398,6 @@ class MainWindow:
             self.entry_saved()
 
     def iconfix(self):
-        self.ui.main.setIcon(QIcon("icons/home.svg"))
-        self.ui.vault_2.setIcon(QIcon("icons/database.svg"))
         self.ui.passwordgen.setIcon(QIcon("icons/key.svg"))
         self.ui.create_entry.setIcon(QIcon("icons/plus-circle.svg"))
         self.ui.create_folder.setIcon(QIcon("icons/folder-plus.svg"))

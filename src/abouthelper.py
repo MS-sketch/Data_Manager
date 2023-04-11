@@ -17,6 +17,8 @@ class MainWindow_About:
         self.ui.tabWidget.setCurrentIndex(0)
         self.ui.stackedWidget_upd.setCurrentWidget(self.ui.app_ver)
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_3)
+        self.ui.tabWidget.removeTab(3)
+        self.ui.tabWidget.removeTab(2)
 
         self.ui.pushButton_2.clicked.connect(self.open_help)
 
