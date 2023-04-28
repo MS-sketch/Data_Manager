@@ -13,7 +13,7 @@ class MainWindow_About:
 
         self.css()
 
-        #Default Config
+        # Default Config
         self.ui.tabWidget.setCurrentIndex(0)
         self.ui.stackedWidget_upd.setCurrentWidget(self.ui.app_ver)
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_3)
@@ -22,10 +22,10 @@ class MainWindow_About:
 
         self.ui.pushButton_2.clicked.connect(self.open_help)
 
-        #Software Update
+        # Software Update
         self.ui.pushButton_6.clicked.connect(self.openupd)
 
-        #Updating
+        # Updating
         self.ui.pushButton_9.clicked.connect(self.changewidget1)
 
         #Abort

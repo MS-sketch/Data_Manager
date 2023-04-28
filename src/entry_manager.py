@@ -287,16 +287,19 @@ def delete_from_index(id):
 #==========================From SQLMANAGERHELPER=====================================
 
 def master_existance():
-    conn = sqlite3.connect("usr_settings.db")
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM masterpassword")
-    data = cursor.fetchall()
+    try:
+        conn = sqlite3.connect("usr_settings.db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM masterpassword")
+        data = cursor.fetchall()
 
-    if data == []:
-        return False
+        if data == []:
+            return False
 
-    else:
-        return True
+        else:
+            return True
+    except:
+        return False;
 
 def masterpasswordsave(password_hash):
     conn = sqlite3.connect("usr_settings.db")

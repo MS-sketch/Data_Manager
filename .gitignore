@@ -4,3 +4,5 @@
 *.db
 /.idea
 *.ini
+*.pyc
+/src/build

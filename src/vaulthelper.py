@@ -10,6 +10,7 @@ import entry_manager as en
 from folder_helper import Mainwindow_Folderdiag
 from authcheck import MainWindow_auth
 import configparser
+import os
 
 
 class MainWindow:

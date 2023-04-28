@@ -1088,7 +1088,7 @@ QPushButton:hover{
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_8">
                 <widget class="QPushButton" name="pushButton">
@@ -1482,7 +1482,7 @@ QPushButton:hover{
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_12">
                 <widget class="QPushButton" name="pushButton_2">
@@ -1521,7 +1521,7 @@ QPushButton:hover{
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_14">
                 <widget class="QPushButton" name="pushButton_3">
