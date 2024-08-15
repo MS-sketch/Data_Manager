@@ -288,14 +288,20 @@ def delete_from_index(id):
 def master_existance():
     conn = sqlite3.connect("usr_settings.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM masterpassword")
-    data = cursor.fetchall()
 
-    if data == []:
+    try:
+        cursor.execute("SELECT * FROM masterpassword")
+        data = cursor.fetchall()
+        if data == []:
+            return False
+
+        else:
+            return True
+
+    except:
         return False
 
-    else:
-        return True
+
 
 def masterpasswordsave(password_hash):
     conn = sqlite3.connect("usr_settings.db")

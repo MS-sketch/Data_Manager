@@ -3,7 +3,6 @@ from PyQt6.QtWidgets import QApplication
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QDialog
 import sys
-from PySide2 import QtCore
 from PyQt6.QtGui import *
 
 class MainWindow:

@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import *
 from abouthelper import MainWindow_About
 from passwordhelper import MainWindow_Password
 import entry_manager as en
-from folder_unit_help import MainWindow_Folder_Unit
+# from folder_unit_help import MainWindow_Folder_Unit
 from folder_helper import Mainwindow_Folderdiag
 from authcheck import MainWindow_auth
 import configparser
@@ -19,7 +19,7 @@ class MainWindow:
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.main_win)
 
-        self.iconfix()
+        self.iconFix()
 
         # Encryption Key Create.
         dataencryptor.keychk()
@@ -43,13 +43,13 @@ class MainWindow:
 
         self.ui.reset.clicked.connect(self.btn_reset)
 
-        self.ui.create_folder.clicked.connect(self.open_newfolder)
+        self.ui.create_folder.clicked.connect(self.openNewFolder)
 
-        self.window_for_newfolder = Mainwindow_Folderdiag()
+        self.windowForNewFolder = Mainwindow_Folderdiag()
 
-        self.window_for_newfolder.folder_diag_ui.ok_btn.clicked.connect(self.create_new_folder)
+        self.windowForNewFolder.folder_diag_ui.ok_btn.clicked.connect(self.create_new_folder)
 
-        self.floder_layout = QVBoxLayout(self.ui.scrollAreaWidgetContents_2)
+        self.folderLayout = QVBoxLayout(self.ui.scrollAreaWidgetContents_2)
 
         self.ui.tabWidget.setCurrentIndex(0)
 
@@ -65,7 +65,7 @@ class MainWindow:
         # Setting Button Edit Function
         self.ui.save_btn_3.clicked.connect(lambda: self.edit_mode())
 
-        self.ui.create_folder_2.clicked.connect(self.open_newfolder)
+        self.ui.create_folder_2.clicked.connect(self.openNewFolder)
 
         self.ui.create_entry_2.clicked.connect(self.new_entry)
 
@@ -109,8 +109,8 @@ class MainWindow:
         self.ui.stackedWidget_18.setCurrentWidget(self.ui.page_41)
 
     def refresh_folder_area(self):
-        for i in reversed(range(self.floder_layout.count())):
-            self.floder_layout.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self.folderLayout.count())):
+            self.folderLayout.itemAt(i).widget().setParent(None)
         self.spawn_folder_items()
 
     def delete_folder(self, folder_name, index_no):
@@ -119,8 +119,8 @@ class MainWindow:
         self.delete_folder2(new_del)
 
     def delete_folder2(self, index_number):
-        for i in reversed(range(self.floder_layout.count())):
-            self.floder_layout.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self.folderLayout.count())):
+            self.folderLayout.itemAt(i).widget().setParent(None)
         self.spawn_folder_items()
 
         self.ui.comboBox.removeItem(index_number)
@@ -135,7 +135,7 @@ class MainWindow:
 
         newBtn.setObjectName(str(name))
         newBtn.clicked.connect(lambda: self.open_folder_contents(newBtn.objectName(), index))
-        self.floder_layout.addWidget(newBtn)
+        self.folderLayout.addWidget(newBtn)
         self.add_new_items_in_combo_box(name)
 
     def spawn_folder_items(self):
@@ -170,7 +170,7 @@ class MainWindow:
             input_barrier = self.data_check()
 
             if input_barrier:
-                self.open_newfolder()
+                self.openNewFolder()
 
     def entry_saved(self):
         self.refresh_scroll_area()
@@ -277,7 +277,7 @@ class MainWindow:
         else:
             self.ui.primary_websitedomain.setChecked(False)
 
-    def set_entry_onsc(self, id):
+    def setEntryOnScreen(self, id):
         id2 = self.ui.save_btn_3.setObjectName(str(id))
         self.current_id = id
         self.btn_id = id2
@@ -305,7 +305,7 @@ class MainWindow:
             newBtn = QPushButton(str(name))
 
         newBtn.setObjectName(str(id))
-        newBtn.clicked.connect(lambda: self.set_entry_onsc(newBtn.objectName()))
+        newBtn.clicked.connect(lambda: self.setEntryOnScreen(newBtn.objectName()))
         self.lay.addWidget(newBtn)
 
     def make_btn(self):
@@ -339,12 +339,12 @@ class MainWindow:
             notes = self.ui.notes.toPlainText()
 
             if self.ui.primary_websitedomain.isChecked():
-                ischeck = 0
+                webDomainOption = 0
 
             else:
-                ischeck = 1
+                webDomainOption = 1
 
-            entry_manager.update_create_entry(id, title, website, ischeck, usr_name, password, notes)
+            entry_manager.update_create_entry(id, title, website, webDomainOption, usr_name, password, notes)
 
             self.btn_id = 0
 
@@ -363,10 +363,10 @@ class MainWindow:
 
         if input_barrier:
             if self.ui.primary_websitedomain.isChecked():
-                ischeck = 0
+                webDomainOption = 0
 
             else:
-                ischeck = 1
+                webDomainOption = 1
 
             id_no = int(self.entry_number) + 1
             print(id_no)
@@ -377,7 +377,7 @@ class MainWindow:
             password = self.ui.lineEdit_3.text()
             notes = self.ui.notes.toPlainText()
 
-            en.insert_in_default(id_no, title, website, ischeck, usr_name, password, notes)
+            en.insert_in_default(id_no, title, website, webDomainOption, usr_name, password, notes)
 
             self.ui.stackedWidget_2.setCurrentWidget(self.ui.page_3)
 
@@ -387,7 +387,7 @@ class MainWindow:
 
             self.entry_saved()
 
-    def iconfix(self):
+    def iconFix(self):
         self.ui.main.setIcon(QIcon("icons/home.svg"))
         self.ui.vault_2.setIcon(QIcon("icons/database.svg"))
         self.ui.passwordgen.setIcon(QIcon("icons/key.svg"))
@@ -507,12 +507,12 @@ class MainWindow:
     def open_about(self):
         self.window_for_about.show()
 
-    def open_newfolder(self):
-        self.ui_for_newfolder = Mainwindow_Folderdiag()
-        self.window_for_newfolder.show()
+    def openNewFolder(self):
+        self.diagForNewFolder = Mainwindow_Folderdiag()
+        self.windowForNewFolder.show()
 
     def create_new_folder(self):
-        folder_name_fromstr = self.window_for_newfolder.folder_diag_ui.lineEdit.text()
+        folder_name_fromstr = self.windowForNewFolder.folder_diag_ui.lineEdit.text()
 
         folder_name_len = len(folder_name_fromstr)
 
@@ -550,7 +550,7 @@ class MainWindow:
 
             if button == QMessageBox.StandardButton.Ok:
                 pass
-            self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+            self.windowForNewFolder.folder_diag_ui.lineEdit.setText("")
             text_limit.close()
 
         else:
@@ -570,7 +570,7 @@ class MainWindow:
 
                     if button == QMessageBox.StandardButton.Ok:
                         pass
-                    self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+                    self.windowForNewFolder.folder_diag_ui.lineEdit.setText("")
                     name_exception.close()
 
                     folder_name_fromstr = ""
@@ -590,15 +590,15 @@ class MainWindow:
 
                     if button == QMessageBox.StandardButton.Ok:
                         pass
-                    self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
+                    self.windowForNewFolder.folder_diag_ui.lineEdit.setText("")
                     name_exception.close()
 
                 else:
                     en.insert_special_folder_index(str(folder_name_fromstr))
-                    self.window_for_newfolder.folder_diag_ui.lineEdit.setText("")
-                    self.window_for_newfolder.folder_name_diag_win.close()
+                    self.windowForNewFolder.folder_diag_ui.lineEdit.setText("")
+                    self.windowForNewFolder.folder_name_diag_win.close()
                     self.refresh_folder_area()
-                    self.window_for_newfolder.folder_name_diag_win.close()
+                    self.windowForNewFolder.folder_name_diag_win.close()
 
             else:
                 pass
